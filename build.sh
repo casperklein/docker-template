@@ -1,7 +1,7 @@
 #!/bin/bash
 
 USER=casperklein
-NAME=template
+NAME=
 TAG=latest
 
 [ -n "$USER" ] && TAG=$USER/$NAME:$TAG || TAG=$NAME:$TAG
