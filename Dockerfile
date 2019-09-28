@@ -5,6 +5,7 @@ ENV	PACKAGES=""
 # Install packages
 RUN     apt-get update \
 &&	apt-get -y install $PACKAGES
+#&&	apt-get -y --no-install-recommends install $PACKAGES
 
 # Copy root filesystem
 COPY	rootfs /
