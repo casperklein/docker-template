@@ -1,11 +1,11 @@
-FROM    debian:10-slim as build
+FROM	debian:10-slim as build
 
 ENV	PACKAGES=""
 
 SHELL	["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install packages
-RUN     apt-get update \
+RUN	apt-get update \
 &&	apt-get -y install $PACKAGES
 #&&	apt-get -y --no-install-recommends install $PACKAGES
 
