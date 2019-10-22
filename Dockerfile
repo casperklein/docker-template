@@ -1,5 +1,8 @@
 FROM	debian:10-slim as build
 
+ENV	NAME=docker-template
+ENV	VERSION=latest
+
 ENV	PACKAGES=""
 
 SHELL	["/bin/bash", "-o", "pipefail", "-c"]
