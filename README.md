@@ -1,6 +1,6 @@
 # Headline1
 
-Visit [this](https://example.com) site for more information.
+See [Markdown-Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) for more information.
 
 ## List
 
