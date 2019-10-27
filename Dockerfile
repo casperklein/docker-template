@@ -1,7 +1,8 @@
 FROM	debian:10-slim as build
 
-ENV	NAME=docker-template
-ENV	VERSION=latest
+ENV	USER="casperklein"
+ENV	NAME="docker-template"
+ENV	VERSION="latest"
 
 ENV	PACKAGES=""
 
@@ -27,5 +28,6 @@ ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 
 #EXPOSE  80
 #HEALTHCHECK --retries=1 CMD curl -f -A 'Docker: Health-Check' http://127.0.0.1/ || exit 1
+#HEALTHCHECK --retries=1 CMD bash -c "</dev/tcp/localhost/80"
 
 CMD	["/run.sh"]

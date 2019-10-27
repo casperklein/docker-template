@@ -1,0 +1,26 @@
+# Headline1
+
+Visit [this](https://example.com) site for more information.
+
+## List
+
+1. one
+1. two
+1. three
+    * dot 1
+    * dot 2
+1. six
+
+## Emphasis
+Italics with *asterisks* or _underscores_.
+
+Bold with **asterisks** or __underscores__.
+
+Italics and bold combined with **asterisks and _underscores_**.
+
+Strikethrough uses two tildes. ~~Scratch this.~~
+
+## Screenshots:
+
+### Main page
+![Screenshot of main page](https://raw.githubusercontent.com/netbox-community/netbox/develop/docs/media/screenshot1.png "Main page")
