@@ -5,6 +5,7 @@ ENV	NAME="docker-template"
 ENV	VERSION="latest"
 
 ENV	PACKAGES=""
+ENV	PACKAGES_CLEAN=""
 
 SHELL	["/bin/bash", "-o", "pipefail", "-c"]
 
@@ -18,6 +19,10 @@ COPY	rootfs /
 
 # do stuff
 # add/copy/run something
+
+# Cleanup
+RUN     apt-get -y purge $PACKAGES_CLEAN \
+&&      apt -y autoremove
 
 # Build final image
 RUN	apt-get -y install dumb-init \
