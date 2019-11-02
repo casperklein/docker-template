@@ -1,5 +1,5 @@
 # all targets are phony (no files to check)
-.PHONY: default build clean install uninstall
+.PHONY: default build clean install uninstall push
 
 default: build
 
@@ -18,3 +18,10 @@ install:
 
 uninstall:
 	echo "Uninstalling.."
+
+push:
+	echo "Pushing image to docker hub.."
+	USER=$$(grep -P 'ENV\s+USER=".+?"' Dockerfile | cut -d'"' -f2) && \
+	NAME=$$(grep -P 'ENV\s+NAME=".+?"' Dockerfile | cut -d'"' -f2) && \
+	VERSION=$$(grep -P 'ENV\s+VERSION=".+?"' Dockerfile | cut -d'"' -f2) && \
+	docker push $$USER/$$NAME:$$VERSION
