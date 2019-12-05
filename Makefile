@@ -22,8 +22,5 @@ uninstall:
 
 push:
 	echo "Pushing image to docker hub.."
-	USER=$$(grep -P 'ENV\s+USER=".+?"' Dockerfile | cut -d'"' -f2) && \
-	NAME=$$(grep -P 'ENV\s+NAME=".+?"' Dockerfile | cut -d'"' -f2) && \
-	VERSION=$$(grep -P 'ENV\s+VERSION=".+?"' Dockerfile | cut -d'"' -f2) && \
-	docker push $$USER/$$NAME:$$VERSION
-	docker push $$USER/$$NAME:latest
+	docker push $(USER)/$(NAME):$(VERSION)
+	docker push $(USER)/$(NAME):latest
