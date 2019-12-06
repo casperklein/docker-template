@@ -12,7 +12,8 @@ build:
 
 clean:
 	echo "Cleaning.."
-	docker rmi $(USER)/$(NAME):$(VERSION)
+	docker rmi $(USER)/$(NAME):$(VERSION); \
+	docker rmi $(USER)/$(NAME):latest
 
 install:
 	echo "Installing.."
