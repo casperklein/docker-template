@@ -16,5 +16,5 @@ docker build -t "$TAG" .
 docker tag "$TAG" "$USER/$NAME:latest"
 
 #echo "Copy $NAME $VERSION debian package to $(pwd)/"
-#docker run --rm -v "$(pwd)":/mnt/ "$TAG"
+#docker run --rm -v "$PWD":/mnt/ "$TAG"
 #echo
