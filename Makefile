@@ -8,20 +8,20 @@ VERSION := $(shell grep -P 'ENV\s+VERSION=".+?"' Dockerfile | cut -d'"' -f2)
 default: build
 
 build:
-	./build.sh
+	@./build.sh
 
 clean:
-	echo "Cleaning.."
+	@echo "Removing Docker images.."
 	docker rmi $(USER)/$(NAME):$(VERSION); \
 	docker rmi $(USER)/$(NAME):latest
 
 install:
-	echo "Installing.."
+	@echo "Installing.."
 
 uninstall:
-	echo "Uninstalling.."
+	@echo "Uninstalling.."
 
 push:
-	echo "Pushing image to docker hub.."
+	@echo "Pushing image to Docker Hub.."
 	docker push $(USER)/$(NAME):$(VERSION)
 	docker push $(USER)/$(NAME):latest
