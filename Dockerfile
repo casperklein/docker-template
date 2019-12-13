@@ -31,7 +31,7 @@ FROM	scratch
 COPY	--from=build / /
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 
-#EXPOSE  80
+#EXPOSE	80
 #HEALTHCHECK --retries=1 CMD curl -f -A 'Docker: Health-Check' http://127.0.0.1/ || exit 1
 #HEALTHCHECK --retries=1 CMD bash -c "</dev/tcp/localhost/80"
 
