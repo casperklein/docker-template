@@ -12,8 +12,8 @@ build:
 
 clean:
 	@echo "Removing Docker images.."
-	docker rmi $(USER)/$(NAME):$(VERSION); \
-	docker rmi $(USER)/$(NAME):latest
+	docker rmi "$(USER)/$(NAME):$(VERSION)"; \
+	docker rmi "$(USER)/$(NAME):latest"
 
 install:
 	@echo "Installing.."
@@ -23,5 +23,5 @@ uninstall:
 
 push:
 	@echo "Pushing image to Docker Hub.."
-	docker push $(USER)/$(NAME):$(VERSION)
-	docker push $(USER)/$(NAME):latest
+	docker push "$(USER)/$(NAME):$(VERSION)"
+	docker push "$(USER)/$(NAME):latest"
