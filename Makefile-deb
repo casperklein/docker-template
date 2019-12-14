@@ -12,11 +12,11 @@ build:
 	@./build-deb.sh "$(debian)"
 
 clean:
-	rm -f $(APP)_$(VERSION)-1_*.deb
-	docker rmi $(USER)/$(NAME):$(VERSION)
+	rm -f "$(APP)_$(VERSION)"-1_*.deb
+	docker rmi "$(USER)/$(NAME):$(VERSION)"
 
 install:
-	dpkg -i $(APP)_$(VERSION)-1_*.deb
+	dpkg -i "$(APP)_$(VERSION)"-1_*.deb
 
 uninstall:
-	apt-get purge $(APP)
+	apt-get purge "$(APP)"
