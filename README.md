@@ -24,6 +24,10 @@ Italics and bold combined with **asterisks and _underscores_**.
 
 Strikethrough uses two tildes. ~~Scratch this.~~
 
+## Highlight something
+
+Hello `world`
+
 ## Screenshots:
 
 ### Main page
