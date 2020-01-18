@@ -6,6 +6,16 @@ WYSIWYG: [editor.md](https://pandao.github.io/editor.md/examples/simple.html)
 
 [Github Test](https://github.com/casperklein/test/edit/master/README.md)
 
+## Code
+
+    4 spaces for a codeblock.
+
+1. foo
+
+        8 spaces for a codeblock in a listing
+
+1. bar
+
 ## List
 
 1. one
