@@ -1,6 +1,8 @@
 # all targets are phony (no files to check)
 .PHONY: default build clean install uninstall push
 
+SHELL = /bin/bash
+
 USER := $(shell grep -P 'ENV\s+USER=".+?"' Dockerfile | cut -d'"' -f2)
 NAME := $(shell grep -P 'ENV\s+NAME=".+?"' Dockerfile | cut -d'"' -f2)
 VERSION := $(shell grep -P 'ENV\s+VERSION=".+?"' Dockerfile | cut -d'"' -f2)
