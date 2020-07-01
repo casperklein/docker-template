@@ -26,6 +26,8 @@ RUN	apt-get -y purge $PACKAGES_CLEAN \
 &&	apt -y autoremove
 
 # Build final image
+# cat Dockerfile | grep -i -e CMD -e ENTRYPOINT -e ENV -e EXPOSE -e LABEL -e VOLUME -e WORKDIR | sort
+# cat Dockerfile | grep -i -v -e ^$ -e ADD -e COPY -e FROM -e RUN -e SHELL | sort
 RUN	apt-get -y install dumb-init \
 &&	rm -rf /var/lib/apt/lists/*
 FROM	scratch
