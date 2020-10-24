@@ -1,8 +1,8 @@
 FROM	debian:10-slim as build
 
 ENV	USER="casperklein"
-ENV	NAME="docker-template"
-ENV	VERSION="latest"
+ENV	NAME="template"
+ENV	VERSION="0.1"
 
 ENV	PACKAGES=""
 ENV	PACKAGES_CLEAN=""
