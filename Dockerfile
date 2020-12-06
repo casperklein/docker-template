@@ -4,6 +4,11 @@ ENV	USER="casperklein"
 ENV	NAME="template"
 ENV	VERSION="0.1"
 
+ENv	GIT_USER=""
+ENV	GIT_REPO=""
+ENV	GIT_COMMIT=""
+ENV	GIT_ARCHIVE="https://github.com/$GIT_USER/$GIT_REPO/archive/$GIT_COMMIT.tar.gz"
+
 ENV	PACKAGES=""
 ENV	PACKAGES_CLEAN=""
 
@@ -15,6 +20,11 @@ RUN	apt-get update \
 &&	apt-get -y upgrade \
 &&	apt-get -y install $PACKAGES
 #&&	apt-get -y --no-install-recommends install $PACKAGES
+
+# Download source
+WORKDIR	/$GIT_REPO
+ADD	$GIT_ARCHIVE /
+RUN	tar --strip-component 1 -xzvf /$GIT_COMMIT.tar.gz && rm /$GIT_COMMIT.tar.gz
 
 # Copy root filesystem
 COPY	rootfs /
