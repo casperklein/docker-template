@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  foo:
+    build: .
+    image: foo:latest
+    hostname: foo
+    #domainname: ${DOMAINNAME}
+    container_name: foo
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - foo=bar
+    ports:
+      - "123456:123456"
+    links:
+      - "bar:aliasforbar"
+    depends_on:
+      - bar
+    restart: always
+    stop_grace_period: 1m
+
+  bar:
+    image: hello-world
+    hostname: bar
+    container_name: bar
