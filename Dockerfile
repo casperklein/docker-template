@@ -15,7 +15,7 @@ ENV	PACKAGES_CLEAN=""
 SHELL	["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install packages
-#ENV	DEBIAN_FRONTEND=noninteractive
+ENV	DEBIAN_FRONTEND=noninteractive
 RUN	apt-get update \
 &&	apt-get -y upgrade \
 &&	apt-get -y install $PACKAGES
@@ -39,10 +39,11 @@ RUN	apt-get -y purge $PACKAGES_CLEAN \
 # Build final image
 # cat Dockerfile | grep -i -e CMD -e ENTRYPOINT -e ENV -e EXPOSE -e LABEL -e VOLUME -e WORKDIR | sort
 # cat Dockerfile | grep -i -v -e ^$ -e ADD -e COPY -e FROM -e RUN -e SHELL | sort
+# docker inspect XXX | jq '.[].Config | {Entrypoint,Cmd,Env,WorkingDir,Labels,ExposedPorts,Healthcheck}'
 RUN	apt-get -y install dumb-init \
 &&	rm -rf /var/lib/apt/lists/*
 FROM	scratch
-COPY	--from=build / /
+
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 
 #EXPOSE	80
@@ -50,3 +51,4 @@ ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 #HEALTHCHECK --retries=1 CMD bash -c "</dev/tcp/localhost/80"
 
 CMD	["/run.sh"]
+COPY	--from=build / /
