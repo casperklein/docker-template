@@ -45,10 +45,11 @@ RUN	apt-get -y install dumb-init \
 FROM	scratch
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+CMD	["/run.sh"]
 
 #EXPOSE	80
-#HEALTHCHECK --retries=1 CMD curl -f -A 'Docker: Health-Check' http://127.0.0.1/ || exit 1
-#HEALTHCHECK --retries=1 CMD bash -c "</dev/tcp/localhost/80"
 
-CMD	["/run.sh"]
+#HEALTHCHECK --interval=30s --timeout=3s --retries=1 CMD curl -f -A 'Docker: Health-Check' http://127.0.0.1/ || exit 1 # Must only return 0 or 1
+#HEALTHCHECK --interval=30s --timeout=3s --retries=1 CMD bash -c '</dev/tcp/127.0.0.1/80' || exit 1 # Must only return 0 or 1
+
 COPY	--from=build / /
