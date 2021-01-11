@@ -3,9 +3,9 @@ services:
   foo:
     build: .
     image: foo:latest
+    container_name: foo
     hostname: foo
     #domainname: ${DOMAINNAME}
-    container_name: foo
     volumes:
       - /etc/localtime:/etc/localtime:ro
     environment:
