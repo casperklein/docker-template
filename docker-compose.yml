@@ -19,12 +19,13 @@ services:
     restart: always
     stop_grace_period: 1m
 #    healthcheck:
-#      test: "bash -c '</dev/tcp/localhost/3306' || exit 1"
+#      test: "bash -c '</dev/tcp/localhost/1234' || exit 1"
+#      test: "mysqladmin --password=foo ping || exit 1"
 #      test: "curl -f -A 'Docker: Health-Check' http://127.0.0.1/ || exit 1"
 #      start_period: 40s # if service needs more than $interval to start
-#      interval: 30s     # default
-#      timeout: 3s
-#      retries: 1
+#      interval: 30s
+#      timeout: 30s
+#      retries: 3
 
   bar:
     image: hello-world
