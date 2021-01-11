@@ -21,7 +21,8 @@ services:
 #    healthcheck:
 #      test: "bash -c '</dev/tcp/localhost/3306' || exit 1"
 #      test: "curl -f -A 'Docker: Health-Check' http://127.0.0.1/ || exit 1"
-#      interval: 30s
+#      start_period: 40s # if service needs more than $interval to start
+#      interval: 30s     # default
 #      timeout: 3s
 #      retries: 1
 
