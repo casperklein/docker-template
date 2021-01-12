@@ -6,6 +6,7 @@ services:
     container_name: foo
     hostname: foo
     #domainname: ${DOMAINNAME}
+    init: false
     volumes:
       - /etc/localtime:/etc/localtime:ro
     environment:
