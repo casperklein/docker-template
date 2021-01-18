@@ -41,8 +41,8 @@ RUN	checkinstall -y --install=no			\
 			--maintainer=$USER@$NAME	\
 			--pkggroup=$GROUP
 
-# Move tmux debian package to /mnt on container start
-CMD	mv ${APP}_$VERSION$TMUX_DEV-1_*.deb /mnt
+# Move debian package to /mnt on container start
+CMD	mv ${APP}_${VERSION}-1_*.deb /mnt
 
 # Cleanup
 RUN	apt-get -y purge $PACKAGES_CLEAN \
