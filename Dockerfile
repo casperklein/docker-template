@@ -32,13 +32,13 @@ COPY	rootfs /
 # Create debian package with checkinstall
 RUN	echo 'Foo is a nice app which does great things' > description-pak
 ENV	APP="foo"
-ARG	VERSION
 ENV	MAINTAINER="casperklein@docker-foo-builder"
 ENV	GROUP="admin"
+ARG	VERSION
 RUN	checkinstall -y --install=no			\
 			--pkgname=$APP			\
 			--pkgversion=$VERSION		\
-			--maintainer=$USER@$NAME	\
+			--maintainer=$MAINTAINER	\
 			--pkggroup=$GROUP
 
 # Move debian package to /mnt on container start

@@ -7,20 +7,7 @@ APP := $(shell jq -er '.name' < config.json | grep -oP '(?<=docker-).+?(?=-build
 VERSION := $(shell jq -er '.version' < config.json)
 TAG := $(shell jq -er '"\(.image):\(.version)"' < config.json)
 
-ARCH := ${shell			\
-	MACHINE=$$(uname -m);	\
-	case "$$MACHINE" in	\
-        x86_64)			\
-                echo "amd64"	\
-                ;;		\
-        aarch64)		\
-                echo "arm64"	\
-                ;;		\
-        *)			\
-                echo "armhf"	\
-                ;;		\
-        esac			\
-}
+ARCH := $(shell dpkg --print-architecture)
 
 default: build
 
