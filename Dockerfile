@@ -42,7 +42,7 @@ RUN	checkinstall -y --install=no			\
 			--pkggroup=$GROUP
 
 # Move debian package to /mnt on container start
-CMD	mv ${APP}_${VERSION}-1_*.deb /mnt
+CMD	mv ${APP}_*.deb /mnt
 
 # Cleanup
 RUN	apt-get -y purge $PACKAGES_CLEAN \
