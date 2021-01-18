@@ -1,21 +1,18 @@
 FROM	debian:10-slim as build
 
-ENV	USER="casperklein"
-ENV	NAME="template"
-ENV	VERSION="0.1"
-
 ENV	GIT_USER=""
 ENV	GIT_REPO=""
 ENV	GIT_COMMIT=""
 ENV	GIT_ARCHIVE="https://github.com/$GIT_USER/$GIT_REPO/archive/$GIT_COMMIT.tar.gz"
 
-ENV	PACKAGES=""
+ENV	PACKAGES="file checkinstall dpkg-dev"
 ENV	PACKAGES_CLEAN=""
 
 SHELL	["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install packages
 ENV	DEBIAN_FRONTEND=noninteractive
+RUN	echo 'deb http://deb.debian.org/debian buster-backports main' > /etc/apt/sources.list.d/buster-backports.list
 RUN	apt-get update \
 &&	apt-get -y upgrade \
 &&	apt-get -y install $PACKAGES
@@ -31,6 +28,21 @@ COPY	rootfs /
 
 # do stuff
 # add/copy/run something
+
+# Create debian package with checkinstall
+RUN	echo 'Foo is a nice app which does great things' > description-pak
+ENV	APP="foo"
+ARG	VERSION
+ENV	MAINTAINER="casperklein@docker-foo-builder"
+ENV	GROUP="admin"
+RUN	checkinstall -y --install=no			\
+			--pkgname=$APP			\
+			--pkgversion=$VERSION		\
+			--maintainer=$USER@$NAME	\
+			--pkggroup=$GROUP
+
+# Move tmux debian package to /mnt on container start
+CMD	mv ${APP}_$VERSION$TMUX_DEV-1_*.deb /mnt
 
 # Cleanup
 RUN	apt-get -y purge $PACKAGES_CLEAN \

@@ -1,0 +1,6 @@
+{
+  "user": "casperklein",
+  "name": "docker-template",
+  "image": "casperklein/docker-template",
+  "version": "0.1"
+}
