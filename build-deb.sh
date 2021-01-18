@@ -2,8 +2,9 @@
 
 set -ueo pipefail
 
-TAG=$(jq -er '"\(.image):\(.version)"'	< config.json)
 APP=$(jq -er '.name'			< config.json | grep -oP '(?<=docker-).+?(?=-builder)') # docker-app-builder
+VERSION=$(jq -er '.version'		< config.json)
+TAG=$(jq -er '"\(.image):\(.version)"'	< config.json)
 
 MACHINE=$(uname -m)
 case "$MACHINE" in

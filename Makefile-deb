@@ -3,9 +3,9 @@
 
 SHELL := /bin/bash
 
+APP := $(shell jq -er '.name' < config.json | grep -oP '(?<=docker-).+?(?=-builder)')
 VERSION := $(shell jq -er '.version' < config.json)
 TAG := $(shell jq -er '"\(.image):\(.version)"' < config.json)
-APP := $(shell jq -er '.name' < config.json | grep -oP '(?<=docker-).+?(?=-builder)')
 
 ARCH := ${shell			\
 	MACHINE=$$(uname -m);	\
