@@ -15,19 +15,19 @@ ENV	DEBIAN_FRONTEND=noninteractive
 RUN	echo 'deb http://deb.debian.org/debian buster-backports main' > /etc/apt/sources.list.d/buster-backports.list
 RUN	apt-get update \
 &&	apt-get -y upgrade \
-&&	apt-get -y install $PACKAGES
-#&&	apt-get -y --no-install-recommends install $PACKAGES
+&&	apt-get -y --no-install-recommends install $PACKAGES
 
 # Download source
-#WORKDIR	/$GIT_REPO
-#ADD	$GIT_ARCHIVE /
-#RUN	tar --strip-component 1 -xzvf /$GIT_COMMIT.tar.gz && rm /$GIT_COMMIT.tar.gz
+WORKDIR	/$GIT_REPO
+ADD	$GIT_ARCHIVE /
+RUN	tar --strip-component 1 -xzvf /$GIT_COMMIT.tar.gz && rm /$GIT_COMMIT.tar.gz
 
 # Copy root filesystem
 COPY	rootfs /
 
 # do stuff
-# add/copy/run something
+ARG     MAKEFLAGS=""
+RUN	make
 
 # Create debian package with checkinstall
 RUN	echo 'Foo is a nice app which does great things' > description-pak
@@ -59,9 +59,9 @@ FROM	scratch
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 CMD	["/run.sh"]
 
-#EXPOSE	80
+EXPOSE	80
 
-#HEALTHCHECK --interval=30s --timeout=3s --retries=1 CMD bash -c '</dev/tcp/127.0.0.1/80' || exit 1 # Must only return 0 or 1
-#HEALTHCHECK --interval=30s --timeout=3s --retries=1 CMD curl -f -A 'Docker: Health-Check' http://127.0.0.1/ || exit 1 # Must only return 0 or 1
+HEALTHCHECK --interval=30s --timeout=3s --retries=1 CMD bash -c '</dev/tcp/127.0.0.1/80' || exit 1 # Must only return 0 or 1
+HEALTHCHECK --interval=30s --timeout=3s --retries=1 CMD curl -f -A 'Docker: Health-Check' http://127.0.0.1/ || exit 1 # Must only return 0 or 1
 
 COPY	--from=build / /
