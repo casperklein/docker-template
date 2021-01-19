@@ -24,5 +24,5 @@ echo "Copy $APP $VERSION debian package to $PWD/"
 docker run --rm -v "$PWD":/mnt/ "$TAG"
 echo
 
-dpkg -I "${APP}_${VERSION}"-1_${ARCH}.deb
+dpkg -I "${APP}_${VERSION}-1_${ARCH}".deb
 echo
