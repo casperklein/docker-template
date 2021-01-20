@@ -8,8 +8,6 @@ TAG=$(jq -er '"\(.image):\(.version)"'	< config.json)
 
 ARCH=$(dpkg --print-architecture)
 
-[ -n "${1:-}" ] && DEBIAN_VERSION="--build-arg version=$1"
-
 DIR=${0%/*}
 cd "$DIR"
 
@@ -17,7 +15,7 @@ echo "Building: $APP $VERSION"
 echo
 MAKEFLAGS=${MAKEFLAGS:-}
 MAKEFLAGS=${MAKEFLAGS//--jobserver-auth=[[:digit:]],[[:digit:]]/}
-docker build -t "$TAG" ${DEBIAN_VERSION:-} --build-arg MAKEFLAGS="${MAKEFLAGS:-}" --build-arg VERSION="$VERSION" .
+docker build -t "$TAG" --build-arg MAKEFLAGS="${MAKEFLAGS:-}" --build-arg VERSION="$VERSION" .
 echo
 
 echo "Copy $APP $VERSION debian package to $PWD/"
