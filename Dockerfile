@@ -5,7 +5,7 @@ ENV	GIT_REPO=""
 ENV	GIT_COMMIT=""
 ENV	GIT_ARCHIVE="https://github.com/$GIT_USER/$GIT_REPO/archive/$GIT_COMMIT.tar.gz"
 
-ENV	PACKAGES="file checkinstall dpkg-dev"
+ENV	PACKAGES="file checkinstall dpkg-dev dumb-init"
 ENV	PACKAGES_CLEAN=""
 
 SHELL	["/bin/bash", "-o", "pipefail", "-c"]
@@ -15,7 +15,8 @@ ENV	DEBIAN_FRONTEND=noninteractive
 RUN	echo 'deb http://deb.debian.org/debian buster-backports main' > /etc/apt/sources.list.d/buster-backports.list
 RUN	apt-get update \
 &&	apt-get -y upgrade \
-&&	apt-get -y --no-install-recommends install $PACKAGES
+&&	apt-get -y --no-install-recommends install $PACKAGES \
+&&	rm -rf /var/lib/apt/lists/*
 
 # Download source
 WORKDIR	/$GIT_REPO
@@ -52,8 +53,6 @@ RUN	apt-get -y purge $PACKAGES_CLEAN \
 # cat Dockerfile | grep -i -e CMD -e ENTRYPOINT -e ENV -e EXPOSE -e LABEL -e VOLUME -e WORKDIR | sort
 # cat Dockerfile | grep -i -v -e ^$ -e ADD -e COPY -e FROM -e RUN -e SHELL | sort
 # docker inspect XXX | jq '.[].Config | {Entrypoint,Cmd,Env,WorkingDir,Labels,ExposedPorts,Healthcheck}'
-RUN	apt-get -y install dumb-init \
-&&	rm -rf /var/lib/apt/lists/*
 FROM	scratch
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
