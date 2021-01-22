@@ -31,12 +31,12 @@ ARG     MAKEFLAGS=""
 RUN	make
 
 # Create debian package with checkinstall
-RUN	echo 'Foo is a nice app which does great things' > description-pak
 ENV	APP="foo"
 ENV	MAINTAINER="casperklein@docker-foo-builder"
 ENV	GROUP="admin"
 ARG	VERSION
-RUN	checkinstall -y --install=no			\
+RUN	echo 'Foo is a nice app which does great things' > description-pak \
+&&	checkinstall -y --install=no			\
 			--pkgname=$APP			\
 			--pkgversion=$VERSION		\
 			--maintainer=$MAINTAINER	\
