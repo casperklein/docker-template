@@ -47,7 +47,7 @@ CMD	mv ${APP}_*.deb /mnt
 
 # Cleanup
 RUN	apt-get -y purge $PACKAGES_CLEAN \
-&&	apt -y autoremove
+&&	apt-get -y autoremove
 
 # Build final image
 # cat Dockerfile | grep -i -e CMD -e ENTRYPOINT -e ENV -e EXPOSE -e LABEL -e VOLUME -e WORKDIR | sort
