@@ -17,6 +17,8 @@ RUN	apt-get update \
 &&	apt-get -y upgrade \
 &&	apt-get -y --no-install-recommends install $PACKAGES \
 &&	rm -rf /var/lib/apt/lists/*
+RUN	apk upgrade --no-cache \
+&&	apk add --no-cache $PACKAGES \
 
 # Download source
 WORKDIR	/$GIT_REPO
@@ -48,6 +50,7 @@ CMD	mv ${APP}_*.deb /mnt
 # Cleanup
 RUN	apt-get -y purge $PACKAGES_CLEAN \
 &&	apt-get -y autoremove
+RUN	apk del $PACKAGES_CLEAN
 
 # Build final image
 # cat Dockerfile | grep -i -e ^CMD -e ^ENTRYPOINT -e ^ENV -e ^EXPOSE -e ^HEALTHCHECK -e ^LABEL -e ^VOLUME -e ^WORKDIR | sort
