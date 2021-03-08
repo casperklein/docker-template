@@ -29,7 +29,7 @@ RUN	tar --strip-component 1 -xzvf /$GIT_COMMIT.tar.gz && rm /$GIT_COMMIT.tar.gz
 COPY	rootfs /
 
 # do stuff
-ARG     MAKEFLAGS=""
+ARG	MAKEFLAGS=""
 RUN	make
 
 # Create debian package with checkinstall
