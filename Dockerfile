@@ -58,7 +58,7 @@ RUN	apk del $PACKAGES_CLEAN
 # docker inspect XXX | jq '.[].Config | {Cmd, Entrypoint, Env, ExposedPorts, Healthcheck, Labels, Volumes, WorkingDir}'
 FROM	scratch
 
-ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+ENTRYPOINT ["dumb-init", "--"]
 CMD	["/run.sh"]
 
 EXPOSE	80
