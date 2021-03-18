@@ -58,6 +58,9 @@ RUN	apk del $PACKAGES_CLEAN
 # docker inspect XXX | jq '.[].Config | {Cmd, Entrypoint, Env, ExposedPorts, Healthcheck, Labels, Volumes, WorkingDir}'
 FROM	scratch
 
+ARG	VERSION
+LABEL	Version=$VERSION
+
 ENTRYPOINT ["dumb-init", "--"]
 CMD	["/run.sh"]
 
