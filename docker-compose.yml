@@ -29,6 +29,15 @@ services:
 #      retries: 3
 
   bar:
+    networks:
+      mynetwork:
     image: hello-world
     hostname: bar
     container_name: bar
+
+networks:
+  mynetwork:
+    ipam:
+      driver: default
+      config:
+        - subnet: "192.168.255.0/24"
