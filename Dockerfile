@@ -53,7 +53,7 @@ RUN	apt-get -y purge $PACKAGES_CLEAN \
 RUN	apk del $PACKAGES_CLEAN
 
 # Build final image
-# cat Dockerfile | grep -i -e ^CMD -e ^ENTRYPOINT -e ^ENV -e ^EXPOSE -e ^HEALTHCHECK -e ^LABEL -e ^VOLUME -e ^WORKDIR | sort
+# cat Dockerfile | grep -i -e ^ARG -e ^CMD -e ^ENTRYPOINT -e ^ENV -e ^EXPOSE -e ^HEALTHCHECK -e ^LABEL -e ^VOLUME -e ^WORKDIR | sort
 # cat Dockerfile | grep -iv -e '^$' -e '^#' -e '^&&' -e ^ADD -e ^ARG -e ^COPY -e ^FROM -e ^RUN -e ^SHELL | sort
 # docker inspect XXX | jq '.[].Config | {Cmd, Entrypoint, Env, ExposedPorts, Healthcheck, Labels, Volumes, WorkingDir}'
 FROM	scratch
