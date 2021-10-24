@@ -12,7 +12,7 @@ ARCH := $(shell dpkg --print-architecture)
 default: build
 
 build:
-	@./build-deb.sh "$(debian)"
+	@./build-deb.sh
 
 clean:
 	rm -f "$(APP)_$(VERSION)"-1_*.deb
