@@ -1,4 +1,4 @@
-FROM	debian:10-slim as build
+FROM	debian:11-slim as build
 
 ENV	GIT_USER=""
 ENV	GIT_REPO=""
@@ -12,7 +12,7 @@ SHELL	["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install packages
 ENV	DEBIAN_FRONTEND=noninteractive
-RUN	echo 'deb http://deb.debian.org/debian buster-backports main' > /etc/apt/sources.list.d/buster-backports.list
+#RUN	echo 'deb http://deb.debian.org/debian buster-backports main' > /etc/apt/sources.list.d/buster-backports.list
 RUN	apt-get update \
 &&	apt-get -y upgrade \
 &&	apt-get -y --no-install-recommends install $PACKAGES \
