@@ -12,11 +12,14 @@ services:
     environment:
       - foo=bar
     ports:
-      - "123456:123456"
+      - "12345:12345"
     links:
       - "bar:aliasforbar"
     depends_on:
-      - bar
+      bar:
+        condition: service_healthy
+      baz:
+        condition: service_started # default
     restart: always
     stop_grace_period: 1m
 #    healthcheck:
