@@ -34,6 +34,7 @@ services:
   bar:
     networks:
       mynetwork:
+        ipv4_address: 192.168.255.10 # comment for auto assign IP address
     image: hello-world
     hostname: bar
     container_name: bar
