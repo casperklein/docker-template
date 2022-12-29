@@ -58,8 +58,12 @@ RUN	apk del $PACKAGES_CLEAN
 # docker inspect XXX | jq '.[].Config | {Cmd, Entrypoint, Env, ExposedPorts, Healthcheck, Labels, Volumes, WorkingDir}'
 FROM	scratch
 
-ARG	VERSION
-LABEL	Version=$VERSION
+ARG	VERSION="unknown"
+
+LABEL	org.opencontainers.image.description="Just a template"
+LABEL	org.opencontainers.image.source="https://github.com/casperklein/docker-template/"
+LABEL	org.opencontainers.image.title="docker-template"
+LABEL	org.opencontainers.image.version="$VERSION"
 
 ENTRYPOINT ["dumb-init", "--"]
 CMD	["/run.sh"]
