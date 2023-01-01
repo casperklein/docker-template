@@ -1,17 +1,17 @@
 FROM	debian:11-slim as build
 
-ENV	GIT_USER=""
-ENV	GIT_REPO=""
-ENV	GIT_COMMIT=""
-ENV	GIT_ARCHIVE="https://github.com/$GIT_USER/$GIT_REPO/archive/$GIT_COMMIT.tar.gz"
+ARG	GIT_USER=""
+ARG	GIT_REPO=""
+ARG	GIT_COMMIT=""
+ARG	GIT_ARCHIVE="https://github.com/$GIT_USER/$GIT_REPO/archive/$GIT_COMMIT.tar.gz"
 
-ENV	PACKAGES="file checkinstall dpkg-dev dumb-init"
-ENV	PACKAGES_CLEAN=""
+ARG	PACKAGES="file checkinstall dpkg-dev dumb-init"
+ARG	PACKAGES_CLEAN=""
 
 SHELL	["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install packages
-ENV	DEBIAN_FRONTEND=noninteractive
+ARG	DEBIAN_FRONTEND=noninteractive
 #RUN	echo 'deb http://deb.debian.org/debian buster-backports main' > /etc/apt/sources.list.d/buster-backports.list
 RUN	apt-get update \
 &&	apt-get -y upgrade \
@@ -33,10 +33,10 @@ ARG	MAKEFLAGS=""
 RUN	make
 
 # Create debian package with checkinstall
-ENV	APP="foo"
-ENV	MAINTAINER="casperklein@docker-foo-builder"
-ENV	GROUP="admin"
-ARG	VERSION
+ARG	APP="foo"
+ARG	GROUP="admin"
+ARG	MAINTAINER="casperklein@docker-foo-builder"
+ARG	VERSION="unknown"
 RUN	echo 'Foo is a nice app which does great things' > description-pak \
 &&	checkinstall -y --install=no			\
 			--pkgname=$APP			\
