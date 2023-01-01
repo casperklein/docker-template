@@ -18,7 +18,7 @@ RUN	apt-get update \
 &&	apt-get -y --no-install-recommends install $PACKAGES \
 &&	rm -rf /var/lib/apt/lists/*
 RUN	apk upgrade --no-cache \
-&&	apk add --no-cache $PACKAGES \
+&&	apk add --no-cache $PACKAGES
 
 # Download source
 WORKDIR	/$GIT_REPO
