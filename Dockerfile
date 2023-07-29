@@ -1,9 +1,9 @@
 FROM	debian:11-slim as build
 
-ARG	GIT_USER=""
-ARG	GIT_REPO=""
-ARG	GIT_COMMIT=""
-ARG	GIT_ARCHIVE="https://github.com/$GIT_USER/$GIT_REPO/archive/$GIT_COMMIT.tar.gz"
+ARG	GITHUB_USER=""
+ARG	GITHUB_REPO=""
+ARG	GITHUB_COMMIT=""
+ARG	GITHUB_ARCHIVE="https://github.com/$GITHUB_USER/$GITHUB_REPO/archive/$GITHUB_COMMIT.tar.gz"
 
 ARG	PACKAGES="file checkinstall dpkg-dev dumb-init"
 ARG	PACKAGES_CLEAN=""
@@ -21,9 +21,13 @@ RUN	apk upgrade --no-cache \
 &&	apk add --no-cache $PACKAGES
 
 # Download source
-WORKDIR	/$GIT_REPO
-ADD	$GIT_ARCHIVE /
-RUN	tar --strip-component 1 -xzvf /$GIT_COMMIT.tar.gz && rm /$GIT_COMMIT.tar.gz
+WORKDIR	/$GITHUB_REPO
+ADD	$GITHUB_ARCHIVE /
+RUN	tar --strip-component 1 -xzvf /$GITHUB_COMMIT.tar.gz && rm /$GITHUB_COMMIT.tar.gz
+# Get source
+WORKDIR	/$GITHUB_REPO
+RUN	wget -O - "$GITHUB_ARCHIVE" | tar --strip-component 1 -xzv
+
 
 # Copy root filesystem
 COPY	rootfs /
