@@ -40,6 +40,11 @@ services:
     container_name: bar
 
 networks:
+  default: # Instead of, or as well as, specifying your own networks, you can also change the settings of the app-wide default network by defining an entry under networks named 'default'
+    ipam:
+      driver: default
+      config:
+        - subnet: "10.10.10.0/24"
   mynetwork:
     ipam:
       driver: default
