@@ -15,7 +15,7 @@ echo "Building: $APP $VERSION"
 echo
 MAKEFLAGS=${MAKEFLAGS:-}
 MAKEFLAGS=${MAKEFLAGS//--jobserver-auth=[[:digit:]],[[:digit:]]/}
-docker build -t "$TAG" --build-arg MAKEFLAGS="${MAKEFLAGS:-}" --build-arg VERSION="$VERSION" --provenance=false .
+docker build -t "$TAG" --build-arg MAKEFLAGS="${MAKEFLAGS:-}" --build-arg VERSION="$VERSION" --provenance=false "$@" .
 echo
 
 echo "Copy $APP $VERSION debian package to $PWD/${APP}_${VERSION}-1_${ARCH}.deb"
@@ -25,4 +25,6 @@ echo
 echo "Package information:"
 echo
 dpkg -I "${APP}_${VERSION}-1_${ARCH}".deb
+echo
+dpkg -c "${APP}_${VERSION}-1_${ARCH}".deb
 echo
