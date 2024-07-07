@@ -1,7 +1,8 @@
 services:
   foo:
-    build: .
     image: foo:latest
+    build: .
+    pull_policy: build # Do not try to download the image. Build image every time instead.
     container_name: foo
     hostname: foo
     #domainname: ${DOMAINNAME}
