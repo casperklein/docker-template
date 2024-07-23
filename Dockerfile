@@ -42,10 +42,12 @@ ARG	GROUP="admin"
 ARG	MAINTAINER="casperklein@docker-foo-builder"
 ARG	VERSION="unknown"
 RUN	echo 'Foo is a nice app which does great things' > description-pak \
-&&	checkinstall -y --install=no			\
-			--pkgname=$APP			\
-			--pkgversion=$VERSION		\
-			--maintainer=$MAINTAINER	\
+# fstrans=no since debian12 -->  https://bugs.launchpad.net/ubuntu/+source/checkinstall/+bug/976380
+&&	checkinstall -y --fstrans=no             \
+			--install=no             \
+			--pkgname=$APP           \
+			--pkgversion=$VERSION    \
+			--maintainer=$MAINTAINER \
 			--pkggroup=$GROUP
 
 # Move debian package to /mnt on container start
