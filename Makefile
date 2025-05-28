@@ -28,7 +28,7 @@ stop:
 
 restart: stop start
 
-update:	pull restart
+update: pull restart
 
 pull:
 	@docker compose pull
