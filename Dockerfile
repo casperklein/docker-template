@@ -1,4 +1,4 @@
-FROM	debian:12-slim as build
+FROM	debian:13-slim AS build
 
 ARG	GITHUB_USER=""
 ARG	GITHUB_REPO=""
