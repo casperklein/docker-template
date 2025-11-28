@@ -8,17 +8,22 @@ ARG	GITHUB_ARCHIVE="https://github.com/$GITHUB_USER/$GITHUB_REPO/archive/$GITHUB
 ARG	PACKAGES="file checkinstall dpkg-dev dumb-init"
 ARG	PACKAGES_CLEAN=""
 
-SHELL	["/bin/bash", "-o", "pipefail", "-c"]
+SHELL	["/bin/bash", "-e", "-o", "pipefail", "-c"]
 
 # Install packages
 ARG	DEBIAN_FRONTEND="noninteractive"
 #RUN	echo 'deb http://deb.debian.org/debian buster-backports main' > /etc/apt/sources.list.d/buster-backports.list
-RUN	apt-get update \
-&&	apt-get -y upgrade \
-&&	apt-get -y --no-install-recommends install $PACKAGES \
-&&	rm -rf /var/lib/apt/lists/*
-RUN	apk upgrade --no-cache \
-&&	apk add --no-cache $PACKAGES
+RUN <<EOF
+	apt-get update
+	apt-get -y upgrade
+	apt-get -y --no-install-recommends install $PACKAGES
+	rm -rf /var/lib/apt/lists/*
+EOF
+
+RUN <<EOF
+	apk upgrade --no-cache
+	apk add --no-cache $PACKAGES
+EOF
 
 # Download source
 WORKDIR	/$GITHUB_REPO
