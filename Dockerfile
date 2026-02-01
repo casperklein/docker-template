@@ -12,7 +12,6 @@ SHELL	["/bin/bash", "-e", "-o", "pipefail", "-c"]
 
 # Install packages
 ARG	DEBIAN_FRONTEND="noninteractive"
-#RUN	echo 'deb http://deb.debian.org/debian buster-backports main' > /etc/apt/sources.list.d/buster-backports.list
 RUN <<EOF
 	apt-get update
 	apt-get -y upgrade
